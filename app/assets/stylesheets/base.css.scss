@@ -21,7 +21,7 @@ header {
 	margin: 10px 20px 5px 20px;
 }
 .game_details .reset {
-	float:left;
+	float:right;
 	margin: 12px 15px 5px 5px;
 }
 .game_details .score {
@@ -33,6 +33,16 @@ header {
 	float:right;
 	font-size: 20px;
 	margin: 4px 5px 5px 20px;
+	padding:6px;
+	background-color: #585d95;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+.game_details .game_num {
+	float:right;
+	font-size: 20px;
+	margin: 4px 15px 5px 20px;
 	padding:6px;
 	background-color: #585d95;
 	-moz-border-radius: 5px;
