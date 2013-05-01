@@ -38,6 +38,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'haml'
 gem 'turbolinks'
 gem 'jquery-rails'
 
