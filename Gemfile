@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '1.9.3'
 gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
@@ -9,6 +10,7 @@ group :development, :test do
 	gem 'debugger'
 	gem 'capybara'
 	gem 'haml-rails'
+	gem 'thin'
 end
 
 group :test do
@@ -21,6 +23,7 @@ end
 
 group :production do
 	gem 'pg'
+	gem 'thin'
 end
 
 # Gems used only for assets and not required

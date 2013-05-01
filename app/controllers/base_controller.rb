@@ -6,30 +6,27 @@ class BaseController < ApplicationController
 			@new_game_message = "<< Pick a strategy"
 		end
 #		@leaders = Leaders.all
-		current_game = session[:game]
-		if players_guess
-			player_move = players_guess
-			comp_move = rand(5)
-			match = Match.create!(:comp_move => comp_move, :player_move => player_move, :game_id => current_game.id)
-			@comp_move = comp_move
-			@player_move = player_move
+		@current_game = session[:game]
+		if @player_move = players_guess
+			@comp_move = rand(5)
+			match = Match.create!(:comp_move => @comp_move, :player_move => @player_move, :game_id => @current_game.id)
 			if players_guess < 5
-				@winner, @status, game = Match.winner_and_status(comp_move, player_move, current_game)
-				@comp_wins = game.comp_wins
-				@player_wins = game.player_wins
-				@ties = game.ties || 0
-				@total = game.ties + game.comp_wins + game.player_wins
+				@winner, @status, @current_game = Match.winner_and_status(@comp_move, @player_move, @current_game)
+				@comp_wins = @current_game.comp_wins
+				@player_wins = @current_game.player_wins
+				@ties = @current_game.ties
+				@total = @current_game.ties + @current_game.comp_wins + @current_game.player_wins
 				countable_total = @comp_wins + @player_wins
 				@percent_won = countable_total > 0 ? ((@player_wins/countable_total.to_f) * 100).round(2) : 0.0
 			elsif players_guess == 5
 				flash[:warning] = "Invalid strategy."
-				redirect_to rpsls_path(:player_move => nil)
+				redirect_to rpsls_path
 			end
 		else
 			@new_game_message = "<< Pick a strategy"
-			@comp_wins = current_game.comp_wins
-			@player_wins = current_game.player_wins
-			@total = current_game.ties + current_game.comp_wins + current_game.player_wins
+			@comp_wins = @current_game.comp_wins
+			@player_wins = @current_game.player_wins
+			@total = @current_game.ties + @current_game.comp_wins + @current_game.player_wins
 			@percent_won = (@comp_wins + @player_wins) > 0 ? ((@player_wins/(@comp_wins + @player_wins).to_f) * 100).round(2) : 0.0
 		end
 	end
