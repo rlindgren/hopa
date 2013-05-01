@@ -157,7 +157,7 @@ GEM
       nokogiri (~> 1.3)
 
 PLATFORMS
-  ruby
+  ruby (1.9.3)
 
 DEPENDENCIES
   autotest
