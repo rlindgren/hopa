@@ -1,8 +1,8 @@
 %header
 	%h1#title r-p-s-l-s
 	.game_details
-		.total= "[#{@percent_won}%] (#{@total})"
-		.score= " Me  (#{@comp_wins} : #{@player_wins})  You "
+		.total= "[#{@percent_won}%] (#{@total_matches})"
+		.score= " Me  (#{@current_game.comp_wins} : #{@current_game.player_wins})  You "
 		.reset= link_to "Reset", reset_game_path
 		.game_num= "#{@current_game.id}"
 -#		.leaderboard= link_to "Leaderboard", leaderboard_path

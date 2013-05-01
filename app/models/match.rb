@@ -1,12 +1,12 @@
 class Match < ActiveRecord::Base
   attr_accessible :comp_move, :player_move, :game_id
   belongs_to :game
+  belongs_to :leader
 
-	def self.winner_and_status(comp, player, game)
+	def winner_and_status(comp, player, game)
 		diff = player - comp
 		player_move = player
 		comp_move = comp
-		game = Game.find(game.id)
 		if diff == 0
 			game.ties += 1
 			game.save!
@@ -26,9 +26,9 @@ class Match < ActiveRecord::Base
 		end
 	end
 
-	def self.find_status(comp_move, player_move)
-		comp_move = strategies[comp_move]
-		player_move = strategies[player_move]
+	def find_status(comp_move, player_move)
+		comp_move = self.class.strategies[comp_move]
+		player_move = self.class.strategies[player_move]
 		statuses.each do |line|
 			line_down = line.downcase
 			if line_down.include?(comp_move.downcase) && line_down.include?(player_move.downcase)
@@ -41,7 +41,7 @@ class Match < ActiveRecord::Base
 		['rock','Spock','paper','lizard','scissors']
 	end
 
-	def self.statuses
+	def statuses
 		[
 		"Scissors cut paper",
 		"Paper covers rock",

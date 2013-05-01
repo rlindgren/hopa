@@ -2,32 +2,30 @@ class BaseController < ApplicationController
 
 	def rpsls
 		if !session[:game]
-			session[:game] = Game.create!(:comp_wins => 0, :player_wins => 0, :ties => 0, :played_on => Time.now)
+			leader = Leader.create(:played_on => Time.now)
+			game = Game.create!(:comp_wins => 0, :player_wins => 0, :ties => 0, :played_on => Time.now, :leader_id => leader.id)
+			leader.game_id = game.id
+			session[:game] = game.id
 			@new_game_message = "<< Pick a strategy"
 		end
-#		@leaders = Leaders.all
-		@current_game = session[:game]
-		if @player_move = players_guess
-			@comp_move = rand(5)
-			match = Match.create!(:comp_move => @comp_move, :player_move => @player_move, :game_id => @current_game.id)
+		@leaders = Leader.all(:order => "score DESC", :limit => 10)
+		@current_game = Game.find(session[:game])
+		@strategies = Match.strategies
+		if player_move = players_guess
+			comp_move = rand(5)
+			@current_match = Match.create!(:comp_move => comp_move, :player_move => player_move, :game_id => @current_game.id)
 			if players_guess < 5
-				@winner, @status, @current_game = Match.winner_and_status(@comp_move, @player_move, @current_game)
-				@comp_wins = @current_game.comp_wins
-				@player_wins = @current_game.player_wins
-				@ties = @current_game.ties
-				@total = @current_game.ties + @current_game.comp_wins + @current_game.player_wins
-				countable_total = @comp_wins + @player_wins
-				@percent_won = countable_total > 0 ? ((@player_wins/countable_total.to_f) * 100).round(2) : 0.0
-			elsif players_guess == 5
+				@winner, @status, @current_game = @current_match.winner_and_status(comp_move, player_move, @current_game)
+				@total_matches = @current_game.total_matches
+				@percent_won = @current_game.percent_won
+			else
 				flash[:warning] = "Invalid strategy."
 				redirect_to rpsls_path
 			end
 		else
 			@new_game_message = "<< Pick a strategy"
-			@comp_wins = @current_game.comp_wins
-			@player_wins = @current_game.player_wins
-			@total = @current_game.ties + @current_game.comp_wins + @current_game.player_wins
-			@percent_won = (@comp_wins + @player_wins) > 0 ? ((@player_wins/(@comp_wins + @player_wins).to_f) * 100).round(2) : 0.0
+			@total_matches = @current_game.total_matches
+			@percent_won = @current_game.percent_won
 		end
 	end
 
@@ -39,18 +37,14 @@ class BaseController < ApplicationController
 		redirect_to rpsls_path
 	end
 
-	# def leaderboard
-	# 	@leaders = Leaders.all(:order => 'score')
-	# end
+	def leaderboard
+		@leaders = Leader.all(:order => 'score')
+	end
 
 	private
 
-	def strategies
-		['rock','Spock','paper','lizard','scissors']
-	end
-
 	def set_leader(game)
-		score = game.total_score
+		score = game.final_score
 		highscores = Leader.get_highscores
 		if score > highscores.min.to_f || highscores.size < 10
 			name = ('A'..'Z').to_a.sample(3).join.to_s
@@ -62,7 +56,7 @@ class BaseController < ApplicationController
 
 	def players_guess
 		if params[:player_move]
-			%w(0 1 2 3 4).include?(params[:player_move]) ? params[:player_move].to_i : 5
+			Match.strategies.include?(params[:player_move]) ? Match.strategies.index(params[:player_move]) : 5
 	  else
 	  	nil
 	  end

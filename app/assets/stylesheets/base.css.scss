@@ -55,9 +55,6 @@ header {
 	margin: 4px 20px 5px 0px;
 	padding:6px;
 	background-color: #585d95;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
 }
 table#game {
 	position: fixed;
@@ -68,8 +65,11 @@ table#game {
 	padding: 0px;
 	margin: 0px;
 }
-td.game{
-	margin-left: 30px
+td.game {
+	margin-left: 20px
+}
+td.strategies {
+	background-color: #191d4b;
 }
 .status {
 	float:left;
@@ -77,19 +77,26 @@ td.game{
 img[alt="rules"] {
 	float:left;
 }
-table#leaderboard{
-	text-align: left;
+#leaderboard {
 	position: absolute;
+	-moz-box-shadow: 50px;
+	-webkit-box-shadow: 50px;
+	box-shadow: 30px;
+	left: 880px;
 	top: 80px;
-	right:10px;
-	margin: 0, 0, 0, 20px;
-	width:180px;
-	height: 400px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
+	width:40%;
+	margin: 0;
 	padding: 10px;
 	background-color: #585d95;
+}
+table#leaders {
+	text-align: center;
+}
+table#leaders td {
+	padding:5px;
+}
+table#leaders td.date {
+	width:100%;
 }
 #strategy_0 {
 	position: fixed;

@@ -3,9 +3,9 @@
 	-if !@new_game_message
 		%h1= "#{@winner}"
 		%ul.moves
-			%li= image_tag("strategy_#{@comp_move}.png")
+			%li= image_tag("strategy_#{@current_match.comp_move}.png")
 			%li Me
 		%ul.moves
-			%li= image_tag("strategy_#{@player_move}.png")
+			%li= image_tag("strategy_#{@current_match.player_move}.png")
 			%li You
 		%h2.status= @status
