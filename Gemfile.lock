@@ -173,6 +173,7 @@ DEPENDENCIES
   cucumber-rails-training-wheels
   database_cleaner
   debugger
+  haml
   haml-rails
   jquery-rails
   pg
