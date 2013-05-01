@@ -42,12 +42,31 @@ header {
 .game_details .game_num {
 	float:right;
 	font-size: 20px;
-	margin: 4px 15px 5px 20px;
+	margin: 4px 15px 5px 10px;
 	padding:6px;
 	background-color: #585d95;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
+}
+#name_input_form {
+	float:right;
+	font-size: 20px;
+	margin: 14px 0px 5px 10px;
+	padding:6px;
+	background-color: #585d95;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+.name_input_field {
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+	margin:0;
+	font-family: helvetica, arial, sans serif;
+	padding: 3px;
+	font-size: 16px
 }
 .game_details .leaderboard {
 	float:left;
@@ -58,8 +77,8 @@ header {
 }
 table#game {
 	position: fixed;
-	top:66px;
-	left: 15px;
+	top:80px;
+	left:30px;
 	width: 900px;
 	min-width: 200px;
 	padding: 0px;
@@ -70,6 +89,7 @@ td.game {
 }
 td.strategies {
 	background-color: #191d4b;
+	width:400px;
 }
 .status {
 	float:left;
@@ -77,26 +97,21 @@ td.strategies {
 img[alt="rules"] {
 	float:left;
 }
-#leaderboard {
-	position: absolute;
-	-moz-box-shadow: 50px;
-	-webkit-box-shadow: 50px;
-	box-shadow: 30px;
-	left: 880px;
-	top: 80px;
-	width:40%;
+table#leaderboard {
+	position: relative;
+	top: 40px;
 	margin: 0;
+	left:880px;
 	padding: 10px;
 	background-color: #585d95;
-}
-table#leaders {
 	text-align: center;
+	width:550px;
 }
-table#leaders td {
-	padding:5px;
+table#leaderboard td {
+	width:30px;
 }
-table#leaders td.date {
-	width:100%;
+table#leaderboard td.date {
+	width:100px;
 }
 #strategy_0 {
 	position: fixed;
@@ -104,8 +119,8 @@ table#leaders td.date {
 	background-position: top;
 	width: 166px;
 	height: 166px;
-	top:68px;
-	left:149px;
+	top:82px;
+	left:163px;
 }
 #strategy_0:hover {
 	background-position: bottom;
@@ -116,8 +131,8 @@ table#leaders td.date {
 	background-position: top;
 	width: 166px;
 	height: 166px;
-	top:162px;
-	left:21px;
+	top:176px;
+	left:36px;
 }
 #strategy_1:hover {
 	background-position: bottom;
@@ -128,8 +143,8 @@ table#leaders td.date {
 	background-position: top;
 	width: 166px;
 	height: 166px;
-	top:163px;
-	left:274px;
+	top:177px;
+	left:289px;
 }
 #strategy_2:hover {
 	background-position: bottom;
@@ -140,8 +155,8 @@ table#leaders td.date {
 	background-position: top;
 	width: 166px;
 	height: 166px;
-	top:312px;
-	left:73px;
+	top:326px;
+	left:87px;
 }
 #strategy_3:hover {
 	background-position: bottom;
@@ -152,8 +167,8 @@ table#leaders td.date {
 	background-position: top;
 	width: 166px;
 	height: 166px;
-	top:312px;
-	left:231px;
+	top:326px;
+	left:246px;
 }
 #strategy_4:hover {
 	background-position: bottom;

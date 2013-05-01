@@ -1,0 +1,4 @@
+= form_tag '/name_input', :method => 'post', :id => 'name_input_form' do
+	= label_tag :name, "your initials: "
+	= text_field_tag :name, nil, {:placeholder => 'max 3', :class => 'name_input_field', :maxlength => 3, :size => 5}
+	= submit_tag "submit"

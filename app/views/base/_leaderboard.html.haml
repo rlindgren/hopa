@@ -1,14 +1,19 @@
-#leaderboard Leaderboard ( scroll/swipe <-- )	
 %table#leaderboard
 	%tbody
 		%tr
 			%th Name
 			%th Score
+			%th Wins
+			%th Losses
+			%th Ties
 			%th Matches
 			%th Date
 		- @leaders.each do |leader|
 			%tr 
 				%td= leader.name if leader.name
 				%td= leader.score if leader.score
+				%td= leader.wins
+				%td= leader.losses
+				%td= leader.ties
 				%td= leader.num_matches
-				%td{:class => 'date'}= time_ago_in_words(leader.played_on) rescue leader.played_on
+				%td= time_ago_in_words(leader.played_on) rescue leader.played_on

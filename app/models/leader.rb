@@ -6,14 +6,58 @@ class Leader < ActiveRecord::Base
 
 	def self.get_highscores
 		highscores = []
-		highscorers = all(:order => "score DESC", :limit => 10)
+		highscorers = self.all(:order => "score DESC", :limit => 10)
 		highscorers.each { |hs| highscores << hs.score }
 		highscores
 	end
 
+	def method_missing(*args)
+
+	end
+
+	def wins
+		begin
+			game = Game.find(self.game_id)
+			game.player_wins
+		rescue
+			0
+		end
+	end
+
+	def ties
+		begin
+			game = Game.find(self.game_id)
+			game.ties
+		rescue
+			0
+		end
+	end
+
+	def losses
+		begin
+			game = Game.find(self.game_id)
+			game.comp_wins
+		rescue
+			0
+		end
+	end
+
 	def num_matches
-		game = Game.find(self.id)
-		game.matches.size
+		begin
+			game = Game.find(self.game_id)
+			game.matches.size
+		rescue
+			0	
+		end
+	end
+
+	def num_matches
+		begin
+			game = Game.find(self.game_id)
+			game.matches.size
+		rescue
+			0	
+		end
 	end
 
 end

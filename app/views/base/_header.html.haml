@@ -5,4 +5,7 @@
 		.score= " Me  (#{@current_game.comp_wins} : #{@current_game.player_wins})  You "
 		.reset= link_to "Reset", reset_game_path
 		.game_num= "#{@current_game.id}"
+		.reset= @name_msg
+
+	= render 'form'
 -#		.leaderboard= link_to "Leaderboard", leaderboard_path

@@ -11,6 +11,8 @@
 		#main
 			- if flash[:notice]
 				#notice.message= flash[:notice]
+			-elsif @name_msg
+				#notice.message= @name_msg
 			-elsif flash[:warning]
 				#warning.message= flash[:warning]
 			= yield

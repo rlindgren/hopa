@@ -5,6 +5,7 @@ Hopa::Application.routes.draw do
   match '/' => 'base#rpsls', :as => 'rpsls'
   get '/reset_game' => 'base#reset_game', :as => 'reset_game'
   get '/leaderboard' => 'base#leaderboard', :as => 'leaderboard'
+  match '/name_input' => 'base#name_input', :as => 'name_input'
   
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
