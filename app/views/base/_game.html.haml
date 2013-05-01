@@ -1,0 +1,11 @@
+%td
+	%h1= @new_game_message
+	-if !@new_game_message
+		%h1= "Winner: #{@winner}"
+		%ul.moves
+			%li= image_tag("strategy_#{@comp_move}.png")
+			%li Me
+		%ul.moves
+			%li= image_tag("strategy_#{@player_move}.png")
+			%li You
+		%h2= @status

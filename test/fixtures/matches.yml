@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  comp_move: 1
+  player_move: 1
+
+two:
+  comp_move: 1
+  player_move: 1

@@ -1,0 +1,7 @@
+%header
+	%h1#title r-p-s-l-s
+	.game_details
+		.total= "[#{@percent_won}%] (#{@total})"
+		.score= " Me  (#{@comp_wins} : #{@player_wins})  You "
+		.reset= link_to "Reset", reset_game_url
+-#		.leaderboard= link_to "Leaderboard", leaderboard_path

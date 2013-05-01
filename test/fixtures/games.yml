@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  comp_wins: 1
+  player_wins: 1
+  ties: 1
+
+two:
+  comp_wins: 1
+  player_wins: 1
+  ties: 1

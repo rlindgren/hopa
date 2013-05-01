@@ -1,0 +1,7 @@
+%header
+%h1#title r-p-s-l-s
+.game_details
+.total= "#{@percent_won}%] (#{@total})"
+.score= "( You - #{@player_wins} : #{@comp_wins} - Me )"
+.leaderboard= link_to "Leaderboard", rpsls_path
+.reset= link_to "Reset", reset_game_url

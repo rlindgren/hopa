@@ -1,0 +1,15 @@
+%table#game
+	%td
+		-[0, 1, 2, 3, 4].each do |shoot|
+			= link_to '', rpsls_path(:player_move => shoot), :id => "strategy_#{shoot}"
+		= image_tag 'rules.png', :alt => 'rules'
+	= render 'game'	
+-#= render 'leaderboard'
+
+#debug
+	-if ENV["RAILS_ENV"] == "development"
+		= debug(params)
+		= debug(session)
+
+	
+	

@@ -1,0 +1,11 @@
+%table#leaderboard
+	%tbody
+		%tr
+			%th Name
+			%th Score
+			%th Date
+		%tr
+			- @leaders.each do |leader|
+				%td= leader.name
+				%td= leader.score
+				%td= leader.played_on
