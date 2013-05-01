@@ -27,7 +27,7 @@ class BaseController < ApplicationController
 	def reset_game
 		game = Game.find(session[:game])
 		set_leader(game)
-		session[:game], session[:leader] = nil, nil
+		session[:game] = nil
 		flash[:notice] = 'Session has been reset'
 		redirect_to rpsls_path
 	end
