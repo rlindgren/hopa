@@ -1,9 +1,8 @@
 Hopa::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
-  root :to => 'base#rpsls'
-  resources :games, :matches
-  match '/rpsls' => 'base#rpsls', :as => 'rpsls'
+  #root :to => 'base#rpsls'
+  match '/' => 'base#rpsls', :as => 'rpsls'
   get '/reset_game' => 'base#reset_game', :as => 'reset_game'
   get '/leaderboard' => 'base#leaderboard', :as => 'leaderboard'
   

@@ -3,6 +3,10 @@ class Game < ActiveRecord::Base
   has_many :matches, :dependent => :destroy
 
   def total_score
-  	self.player_wins/(self.comp_wins + self.player_wins) * 100
+  	begin
+  		self.player_wins/(self.comp_wins + self.player_wins) * 100
+		rescue
+			0.00
+		end
   end
 end

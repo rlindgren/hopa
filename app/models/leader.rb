@@ -1,4 +1,4 @@
-class Leaders < ActiveRecord::Base
+class Leader < ActiveRecord::Base
 	attr_accessible :name, :score, :played_on
 	validates :name, :presence => true, :length => { :maximum => 3 }
 	has_one :game
