@@ -53,9 +53,7 @@ class BaseController < ApplicationController
 		score = game.final_score
 		highscores = Leader.get_highscores
 		if score > highscores.min.to_f || highscores.size < 10
-			validate_name_input
-			name = session[:name]
-			Leader.create!(:name => name, :score => score, :played_on => game.played_on, :game_id => game.id)
+			validate_name_input_and_create_leader
 		end
 	end
 
@@ -79,10 +77,13 @@ class BaseController < ApplicationController
 		end
 	end
 
-	def validate_name_input
+	def validate_name_input_and_create_leader
 		if !session[:name]
 			flash[:notice] = "You have brought glory unto your name! Now I need it to put on my awesome wall! Submit your initals..."
 			redirect_to rpsls_path
+		else
+			name = session[:name]
+			Leader.create!(:name => name, :score => score, :played_on => game.played_on, :game_id => game.id)
 		end
 	end
 
