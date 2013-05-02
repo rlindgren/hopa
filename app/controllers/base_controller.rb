@@ -64,7 +64,7 @@ class BaseController < ApplicationController
 	private
 
 	def new_game_time?
-		if !session[:game]
+		if !session[:game] || !Game.find(session[:game])
 			game = Game.create!(:comp_wins => 0, 
 													:player_wins => 0, 
 													:ties => 0, 
