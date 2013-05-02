@@ -4,13 +4,10 @@
 class BaseController < ApplicationController
 
 	def rpsls
-		@new_game_message = new_game_time?
-		@current_game = Game.find(session[:game])
-
-		@leaders = Leader.all(:order => "score DESC", :limit => 20)
-		@strategies = Match.strategies
+		@new_game_message, @current_game, flash[:notice] = new_game_time?
 		@name_msg = stored_name
-
+		@leaders = Leader.get_highscorers
+		@strategies = Match.strategies
 		if player_move
 			comp_move = rand(5)
 			@current_match = Match.create!(:comp_move => comp_move, :player_move => player_move, :game_id => @current_game.id)
@@ -26,16 +23,18 @@ class BaseController < ApplicationController
 	end
 
 	def new_game
-		game = Game.find(session[:game])
-		case set_leader(game)
-		when false
-			session[:game] = nil
-			flash[:notice] = "I didn't know your name... one has been chosen for you!"
-			redirect_to rpsls_path
+		if session[:game]
+			begin
+				game = Game.find(session[:game])
+				check_highscores_and_set_new_leader(game)
+				session[:game] = nil
+				flash_and_redirect
+			rescue
+				session[:game] = nil
+				flash_and_redirect
+			end
 		else
-			session[:game] = nil
-			flash[:notice] = 'New game started! Good luck! ;)'
-			redirect_to rpsls_path
+			flash_and_redirect
 		end
 	end
 
@@ -50,7 +49,7 @@ class BaseController < ApplicationController
 			redirect_to rpsls_path
 		else
 			session[:name] = params[:name]
-			flash[:notice] = "#{name_confirmation_messages}"
+			flash[:notice] = "#{name_confirmation_messages}" # method produces string
 			redirect_to rpsls_path
 		end
 	end
@@ -64,14 +63,13 @@ class BaseController < ApplicationController
 	private
 
 	def new_game_time?
-		if !session[:game] 
-			game = Game.create!(:comp_wins => 0, 
-													:player_wins => 0, 
-													:ties => 0, 
-													:played_on => Time.now)
+		begin
+			game = Game.find(session[:game])
+			[nil, game]
+		rescue
+			game = Game.create!(:comp_wins => 0, :player_wins => 0, :ties => 0, :played_on => Time.now)
 			session[:game] = game.id
-			new_game_message = "<< Pick a strategy"
-			new_game_message
+			["<< Pick a strategy", game, "\"new game\" ends the current game, posts your score, and starts a new one!"]
 		end
 	end
 
@@ -80,25 +78,37 @@ class BaseController < ApplicationController
 	end
 
 	def player_move
-		(p = params[:player_move]) ? Match.strategies.include?(p) ? Match.strategies.index(p) : 5 : nil
+		if (p = params[:player])
+			if Match.strategies.include?(p)
+			 	Match.strategies.index(p)
+			else
+			 	5
+			end
+		else
+			nil
+		end
 	end
 
-	def set_leader(game)
+	def flash_and_redirect
+		flash[:notice] = 'New game started! Good luck! ;)'
+		redirect_to rpsls_path
+	end
+
+	def check_highscores_and_set_new_leader(game)
 		score = game.final_score
 		highscores = Leader.get_highscores
-		highscores.include?(nil) ? highscore_low = 0.0 : highscore_low = highscores.min.to_f
-		if highscore_low == 0 || score > highscore_low
+		highscores.include?(nil) || highscores.include?('') ? highscore_low = 0.0 : highscore_low = highscores.min.to_f
+		if highscore_low == 0.0 || score > highscore_low
 			validate_name_input_and_create_leader(game, score)
-		else
-			false
 		end
 	end
 
 	def validate_name_input_and_create_leader(game, score)
-		if name = session[:name]
+		if session[:name]
+			name = session[:name]
 			Leader.create!(:name => name.upcase, :score => score, :played_on => game.played_on, :game_id => game.id)
 		else
-			name = ('A'..'Z').to_a.sample(3).join
+			name = ('A'..'Z').to_a.sample(rand(3)).join
 			Leader.create!(:name => name, :score => score, :played_on => game.played_on, :game_id => game.id)
 		end
 	end
@@ -106,13 +116,13 @@ class BaseController < ApplicationController
 	def name_confirmation_messages
 		name = session[:name]
 		sayings = [
-			"#{name}! so cute!! 囧",
-			"#{name}... really? hehe",
-			"#{name}. OK, if you say so.",
-			"I'm guessing '#{name}' is a family name, huh? :P",
-			"'#{name}' - I like it!",
-			"'#{name}' is probably the worst combination of letters imaginable. j/k!",
-			"Never has a name more gracefully animated the tongue than '#{name}'!",
+			"#{name}! you so cute!! 囧",
+			"'#{name}'... really? hehe",
+			"'#{name}'... OK, if you say so.",
+			"I'm guessing that's a family name? :P",
+			"Alright, alright! - I like it.",
+			"That is possibly the worst combination of letters imaginable. ;P",
+			"Never has a name more gracefully animated the tongue than that.",
 			"I see what you've done there, you dog!"
 		]
 		sayings[rand(sayings.length)]

@@ -22,9 +22,14 @@ class Leader < ActiveRecord::Base
 		RUBY
 	end
 
+	def self.get_highscorers
+		all(:order => "score DESC", :limit => 20)
+	end
+
+
 	def self.get_highscores
 		highscores = []
-		highscorers = self.all(:order => "score DESC", :limit => 10)
+		highscorers = self.get_highscorers
 		highscorers.each { |hs| highscores << hs.score }
 		highscores
 	end
