@@ -7,7 +7,7 @@ class BaseController < ApplicationController
 		@new_game_message = new_game_time?
 		@current_game = Game.find(session[:game])
 
-		@leaders = Leader.all(:order => "score DESC", :limit => 10)
+		@leaders = Leader.all(:order => "score DESC", :limit => 20)
 		@strategies = Match.strategies
 		@name_msg = stored_name
 

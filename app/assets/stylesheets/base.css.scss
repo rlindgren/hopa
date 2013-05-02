@@ -13,50 +13,85 @@ header {
 	top: 0em;
 	#notice {
 		position: fixed;
-		top: 80px;
+		top: 60px;
 		right:30px;
 	}
 	.game_details {
 		float:right;
-		margin: 0;
+		margin: 8px 0px;
 		.statsbox {
-			float:right;
 			font-size: 20px;
 			margin: 0;
-			padding:4px;
 			background-color: #585d95;
 			-moz-border-radius: 5px;
 			-webkit-border-radius: 5px;
 			border-radius: 5px;
 			.total {
+				float: right;
+				margin:5px 5px 0px 10px;
 			}
 			.score {
+				float: right;
+				margin:5px 15px 0px 20px;
 			}
-			.form {
-				position:absolute;
-				right:425px;
-				#name_input_form {
-					margin-top:-3px;
-					margin-right: 45px;
-					padding: 7px 16px;
-					.name_input_field {
-						border-style: solid;
-						border-width: 1px;
-						border-color: black;
-						margin:0 5px 10px 0;
-						height:26px;
-						font-family: helvetica, arial, sans serif;
-						font-size: 16px
+			#name_input_form {
+				float:right;
+				.name_input_field {
+					margin: 0 0 0 0;
+					padding:3px;
+					margin: 0, 0, 0, 20px;
+					border-style: solid;
+					border-width: 1px;
+					border-color: black;
+					height:24px;
+					font-family: helvetica, arial, sans serif;
+					font-size: 16px
+				}
+				input[name=commit] {
+				  background: #333366;
+				  color: #FFF;
+				  font-size: 16px;
+				  margin: 0px;
+				  padding:6px;
+				  -webkit-border-radius: 4px;
+				  -moz-border-radius: 4px;
+				  border-radius: 4px;
+				  border: solid 1px #191d4b;
+				  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+				  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+				  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+				  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+				  -webkit-transition-duration: 0.2s;
+				  -moz-transition-duration: 0.2s;
+				  transition-duration: 0.2s;
+				  -webkit-user-select:none;
+				  -moz-user-select:none;
+				  -ms-user-select:none;
+				  user-select:none;
+				  input[name=commit]:hover {
+					  background: #191d4b;
+					  border: solid 1px #000033;
+					  text-decoration: none;
+					}
+					input[name=commit]:active {
+					  -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+					  -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+					  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+					  background: #585d95;
+					  border: solid 1px #203E5F;
 					}
 				}
 			}
-			input[name=commit] {
-				
-				padding: 6px 12px;
+		}
+		.reset {
+			float:right;
+			margin: 12px 20px 5px 20px;
+			input[value=new game] {
 			  background: #333366;
 			  color: #FFF;
-			  line-height: 20px;
 			  font-size: 16px;
+			  margin: 0px;
+			  padding:6px;
 			  -webkit-border-radius: 4px;
 			  -moz-border-radius: 4px;
 			  border-radius: 4px;
@@ -72,48 +107,30 @@ header {
 			  -moz-user-select:none;
 			  -ms-user-select:none;
 			  user-select:none;
-			}
-			input[name=commit]:hover {
-			  background: #191d4b;
-			  border: solid 1px #000033;
-			  text-decoration: none;
-			}
-			input[name=commit]:active {
-			  -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-			  -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-			  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-			  background: #585d95;
-			  border: solid 1px #203E5F;
-			}
+			  input[value=new game]:hover {
+				  background: #191d4b;
+				  border: solid 1px #000033;
+				  text-decoration: none;
+				}
+				input[value=new game]:active {
+				  -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+				  -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+				  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+				  background: #585d95;
+				  border: solid 1px #203E5F;
+				}
+			}	
 		}
-		.reset {
+		.name_msg {
 			float:right;
-			margin: 20px 20px 5px 20px;
-		}
-		.game_num {
-			float:right;
-			font-size: 20px;
-			margin: 4px 15px 5px 10px;
-			padding:6px;
-			background-color: #585d95;
-			-moz-border-radius: 5px;
-			-webkit-border-radius: 5px;
-			border-radius: 5px;
 		}
 		.leaderboard {
-			float:left;
+			float:right;
 			font-size: 20px;
 			margin: 4px 20px 5px 0px;
 			padding:6px;
 			background-color: #585d95;
 		}
-	}
-	.name_msg {
-		position: absolute;
-		right: 648px;
-		top:-8px;
-		font-size: 14px;
-		margin: 30px 10px 5px 0px;
 	}
 }
 
@@ -124,64 +141,63 @@ header {
 	img[alt="rules"] {
 		float:left;
 	}
-}
-@mixin strategies {
-	position: fixed;
-	background-position: top;
-	width: 166px;
-	height: 166px;
-}
-a[name=strategy_0] {
-	@include strategies;
-	background-image: url('guess_0.png');
-	top:119px;
-	left:186px;
-}
-a[name=strategy_0]:hover {
-	background-position: bottom;
-}
-a[name=strategy_1] {
-	@include strategies;
-	background-image: url('guess_1.png');
-	top:212px;
-	left:58px;
-}
-a[name=strategy_1]:hover {
-	background-position: bottom;
-}
-a[name=strategy_2] {
-	@include strategies;
-	background-image: url('guess_2.png');
-	top:214px;
-	left:311px;
-}
-a[name=strategy_2]:hover {
-	background-position: bottom;
-}
-a[name=strategy_3] {
-	@include strategies;
-	background-image: url('guess_3.png');
-	top:363px;
-	left:110px;
-}
-a[name=strategy_3]:hover {
-	background-position: bottom;
-}
-a[name=strategy_4] {
-	@include strategies;
-	background-image: url('guess_4.png');
-	top:363px;
-	left:268px;
-}
-a[name=strategy_4]:hover {
-	background-position: bottom;
+	@mixin strategies {
+		position: fixed;
+		background-position: top;
+		width: 166px;
+		height: 166px;
+	}
+	a[name=strategy_0] {
+		@include strategies;
+		background-image: url('guess_0.png');
+		top:119px;
+		left:186px;
+	}
+	a[name=strategy_0]:hover {
+		background-position: bottom;
+	}
+	a[name=strategy_1] {
+		@include strategies;
+		background-image: url('guess_1.png');
+		top:212px;
+		left:58px;
+	}
+	a[name=strategy_1]:hover {
+		background-position: bottom;
+	}
+	a[name=strategy_2] {
+		@include strategies;
+		background-image: url('guess_2.png');
+		top:214px;
+		left:311px;
+	}
+	a[name=strategy_2]:hover {
+		background-position: bottom;
+	}
+	a[name=strategy_3] {
+		@include strategies;
+		background-image: url('guess_3.png');
+		top:363px;
+		left:110px;
+	}
+	a[name=strategy_3]:hover {
+		background-position: bottom;
+	}
+	a[name=strategy_4] {
+		@include strategies;
+		background-image: url('guess_4.png');
+		top:363px;
+		left:268px;
+	}
+	a[name=strategy_4]:hover {
+		background-position: bottom;
+	}
 }
 
 #main_center {
 	position: absolute;
 	left: 500px;
 	top:138px;
-	width: 450px;
 	.status {
 		float:left;
 	}
@@ -190,7 +206,7 @@ a[name=strategy_4]:hover {
 		float:left;
 	}
 	table#leaderboard {
-		margin: 35px 0 0 40px;
+		margin: -40px 0 0 0;
 		padding: 10px;
 		background-color: #585d95;
 		text-align: center;
@@ -206,14 +222,21 @@ a[name=strategy_4]:hover {
 }
 
 #main_right {
-	table#leaderboard {
-		position: relative;
-		top: 40px;
-		margin: 0;
+	position: absolute;
+	right: 0px;
+	table#leaderboard_summ {
+		width: 300px;
+		margin: 65px 0 0 40px;
 		padding: 10px;
 		background-color: #585d95;
 		text-align: center;
-		width:100%;
+		-webkit-border-radius: 4px;
+	  -moz-border-radius: 4px;
+	  border-radius: 4px;
+	  border: solid 1px #191d4b;
+		-webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+	  -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+	  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
 	}
 }
 

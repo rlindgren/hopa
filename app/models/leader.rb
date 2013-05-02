@@ -30,7 +30,7 @@ class Leader < ActiveRecord::Base
 	end
 
 	def played
-		time_ago_in_words(self.played_on).sub(/about/,"~").sub(/minutes/,"mins")
+		time_ago_in_words(self.played_on).sub(/about/,"").sub(/minutes/,"mins").sub(/minute/,"min") + " ago"
 	end
 
 end

@@ -1,0 +1,14 @@
+%table#leaderboard_summ
+	%tbody
+		%td
+			
+		%td
+			%tr
+				%th Name
+				%th Score
+				%th Date
+			- @leaders.each do |leader|
+				%tr 
+					%td= leader.name if leader.name
+					%td= leader.score if leader.score
+					%td= leader.played

@@ -27,7 +27,7 @@ strategy_4.png: strategy_4-a63ee4e7ebf086b045f2852a58ff7b2f.png
 strategy_4/index.png: strategy_4-a63ee4e7ebf086b045f2852a58ff7b2f.png
 application.js: application-b97585c6181947916e4a8b24e1ed2067.js
 application/index.js: application-b97585c6181947916e4a8b24e1ed2067.js
-application.css: application-fec217ed2a27fdf5f0347934a577c5fa.css
-application/index.css: application-fec217ed2a27fdf5f0347934a577c5fa.css
+application.css: application-7619d48a712d502d3daa91e65be9a44a.css
+application/index.css: application-7619d48a712d502d3daa91e65be9a44a.css
 jquery.min.map: jquery.min-6c267bfd2b3f36e6edccb2e584934c1c.map
 jquery/index.min.map: jquery.min-6c267bfd2b3f36e6edccb2e584934c1c.map
