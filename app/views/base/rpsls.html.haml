@@ -9,7 +9,7 @@
 		= render :partial => 'game'
 
 #main_right
-	= render(:partial => 'leaderboard_summ') if !flash[:leaderboard]
+	= render(:partial => 'leaderboard_summ') unless flash[:leaderboard]
 
 	
 	

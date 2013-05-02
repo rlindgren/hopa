@@ -4,6 +4,7 @@
 class BaseController < ApplicationController
 
 	def rpsls
+		@player_name = session[:name] || "You"
 		@new_game_message, @current_game, flash[:notice] = new_game_time?
 		@name_msg = stored_name
 		@leaders = Leader.get_highscorers
@@ -26,7 +27,7 @@ class BaseController < ApplicationController
 		if session[:game]
 			begin
 				game = Game.find(session[:game])
-				check_highscores_and_set_new_leader(game)
+				Leader.check_for_highscore_and_create_new_leader(game)
 				session[:game] = nil
 				flash_and_redirect
 			rescue
@@ -39,8 +40,13 @@ class BaseController < ApplicationController
 	end
 
 	def leaderboard
-		flash[:leaderboard] = true
-		redirect_to rpsls_path
+		if flash[:leaderboard]
+			flash[:leaderboard] = false
+			redirect_to rpsls_path and return
+		else
+			flash[:leaderboard] = true
+			redirect_to rpsls_path and return
+		end
 	end
 
 	def name_input
@@ -74,7 +80,7 @@ class BaseController < ApplicationController
 	end
 
 	def stored_name
-		if !session[:name] then "input your initals!" else nil end
+		if !session[:name] then "<< INITIALS!" else nil end
 	end
 
 	def player_move
@@ -92,25 +98,6 @@ class BaseController < ApplicationController
 	def flash_and_redirect
 		flash[:notice] = 'New game started! Good luck! ;)'
 		redirect_to rpsls_path
-	end
-
-	def check_highscores_and_set_new_leader(game)
-		score = game.final_score
-		highscores = Leader.get_highscores
-		highscores.include?(nil) || highscores.include?('') ? highscore_low = 0.0 : highscore_low = highscores.min.to_f
-		if highscore_low == 0.0 || score > highscore_low
-			validate_name_input_and_create_leader(game, score)
-		end
-	end
-
-	def validate_name_input_and_create_leader(game, score)
-		if session[:name]
-			name = session[:name]
-			Leader.create!(:name => name, :score => score, :played_on => game.played_on, :game_id => game.id)
-		else
-			name = ('A'..'Z').to_a.sample(rand(3)).join
-			Leader.create!(:name => name, :score => score, :played_on => game.played_on, :game_id => game.id)
-		end
 	end
 
 	def name_confirmation_messages

@@ -66,12 +66,12 @@ header {
 			float: right;
 			line-height: 24px;
 			font-size: 12px;
-			margin: 8px 15px 0px 15px;
+			margin: 4px 0px 0px 15px;
 		}
 		.leaderboard {
 			float:right;
 			font-size: 20px;
-			margin: 0;
+			margin: 0 15px 0 0;
 			padding:6px;
 			-webkit-border-radius: 4px;
 		  -moz-border-radius: 4px;
@@ -211,7 +211,7 @@ header {
 		float:left;
 	}
 	table#leaderboard {
-		margin: -40px 0 0 0;
+		margin: -55px 0 0 0;
 		padding: 10px;
 		background-color: #585d95;
 		text-align: center;

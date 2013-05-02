@@ -3,9 +3,9 @@
 	.game_details
 		.new_game_btn= button_to "new game", new_game_path, :name => 'new_game_btn'
 		/ .total= "[#{@current_game.percent_won}%] (#{@current_game.total_matches})"
-		.score= " Me  (#{@current_game.comp_wins} : #{@current_game.player_wins})  You "
-		= render 'form'
+		.score= " Me  (#{@current_game.comp_wins} : #{@current_game.player_wins})  #{@player_name} "
 		.name_msg= @name_msg ? @name_msg : link_to("clear", clear_name_path)
-		.leaderboard= link_to "Leaderboard", leaderboard_path
+		= render 'form'
+		.leaderboard= flash[:leaderboard] ? link_to("Back to r-p-s-l-s", rpsls_path) : link_to("Leaderboard", leaderboard_path)
 	#notice= flash[:notice] if flash[:notice]
 	#notice= flash[:warning] if flash[:warning]
