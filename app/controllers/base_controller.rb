@@ -64,15 +64,14 @@ class BaseController < ApplicationController
 	private
 
 	def new_game_time?
-		begin
-			Game.find(session[:game])
-		rescue
+		if !session[:game] 
 			game = Game.create!(:comp_wins => 0, 
 													:player_wins => 0, 
 													:ties => 0, 
 													:played_on => Time.now)
 			session[:game] = game.id
-			"<< Pick a strategy"
+			new_game_message = "<< Pick a strategy"
+			new_game_message
 		end
 	end
 
