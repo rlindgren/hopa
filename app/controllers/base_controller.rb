@@ -69,7 +69,7 @@ class BaseController < ApplicationController
 		rescue
 			game = Game.create!(:comp_wins => 0, :player_wins => 0, :ties => 0, :played_on => Time.now)
 			session[:game] = game.id
-			["<< Pick a strategy", game, "\"new game\" ends the current game, posts your score, and starts a new one!"]
+			["<< Pick a strategy", game, "\"new game\" ends the current game, posts your score, and starts a new one! A new game has begun......"]
 		end
 	end
 
