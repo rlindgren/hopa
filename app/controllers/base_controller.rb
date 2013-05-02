@@ -4,6 +4,7 @@
 class BaseController < ApplicationController
 
 	def rpsls
+		debugger
 		@player_name = session[:name] || "You"
 		@new_game_message, @current_game, flash[:notice] = new_game_time?
 		@name_msg = stored_name
