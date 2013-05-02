@@ -4,7 +4,6 @@
 class BaseController < ApplicationController
 
 	def rpsls
-		debugger
 		@player_name = session[:name] || "You"
 		@new_game_message, @current_game, flash[:notice] = new_game_time?
 		@name_msg = stored_name
@@ -28,7 +27,7 @@ class BaseController < ApplicationController
 		if session[:game]
 			begin
 				game = Game.find(session[:game])
-				Leader.check_for_highscore_and_create_new_leader(game)
+				Leader.check_for_highscore_and_create_new_leader(game, session[:name])
 				session[:game] = nil
 				flash_and_redirect
 			rescue
@@ -38,6 +37,11 @@ class BaseController < ApplicationController
 		else
 			flash_and_redirect
 		end
+	end
+
+	def flash_and_redirect
+		flash[:notice] = 'New game started! Good luck! ;)'
+		redirect_to rpsls_path
 	end
 
 	def leaderboard
@@ -94,11 +98,6 @@ class BaseController < ApplicationController
 		else
 			nil
 		end
-	end
-
-	def flash_and_redirect
-		flash[:notice] = 'New game started! Good luck! ;)'
-		redirect_to rpsls_path
 	end
 
 	def name_confirmation_messages

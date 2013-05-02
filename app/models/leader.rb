@@ -33,23 +33,21 @@ class Leader < ActiveRecord::Base
 		highscores
 	end
 
-	def self.check_for_highscore_and_create_new_leader(game)
+	def self.check_for_highscore_and_create_new_leader(game, name)
 		score = game.final_score
-		highscores, hs_num_matches = get_highscores, []
-		highscores.include?(nil) || highscores.include?('') ? highscore_low = 0.0 : highscore_low = highscores.min.to_f
-		get_highscorers.each { |i| hs_num_matches << i.num_matches }
-		if highscore_low == 0.0 || score > highscore_low && game.matches.size > hs_num_matches.min.to_i
-			set_new_leader(game, score)
+		highscores= get_highscores
+		highscores.include?(nil) || highscores.include?('') ? highscore_low = 0.0 : highscore_low = highscores.min.to_f	
+		if highscore_low === 0.0 || (score > highscore_low && game.matches.size > 10)
+			set_new_leader(game, score, name)
 		end
 	end
 
-	def set_new_leader(game, score)
-		if session[:name]
-			name = session[:name]
-			Leader.create!(:name => name, :score => score, :played_on => game.played_on, :game_id => game.id)
+	def self.set_new_leader(game, score, name)
+		if name
+			create!(:name => name, :score => score, :played_on => game.played_on, :game_id => game.id)
 		else
 			name = ('A'..'Z').to_a.sample(rand(3)).join
-			Leader.create!(:name => name, :score => score, :played_on => game.played_on, :game_id => game.id)
+			create!(:name => name, :score => score, :played_on => game.played_on, :game_id => game.id)
 		end
 	end
 

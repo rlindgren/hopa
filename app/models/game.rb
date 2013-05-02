@@ -13,7 +13,7 @@ class Game < ActiveRecord::Base
   end
 
   def final_score
-  	((player_wins/measurable_total.to_f) * 100).round(2)
+  	total_score
   end
 
   def measurable_total
