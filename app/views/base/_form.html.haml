@@ -1,4 +1,5 @@
 = form_tag '/name_input', :method => 'post', :id => 'name_input_form' do
-	= label_tag :name, "your initials: "
-	= text_field_tag :name, nil, {:placeholder => 'max 3', :class => 'name_input_field', :maxlength => 3, :size => 5}
-	= submit_tag "submit"
+	= label_tag :name, ' '
+	= text_field_tag :name, nil, {:placeholder => "#{session[:name] ? session[:name] : 'MAX'}", :class => 'name_input_field', :maxlength => 3, :minlength => 1, :size => 3}
+	= submit_tag "yup"
+.name_msg= @name_msg ? @name_msg : link_to("change name", clear_name_path)

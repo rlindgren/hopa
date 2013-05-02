@@ -3,8 +3,9 @@ Hopa::Application.routes.draw do
   # first created -> highest priority.
   #root :to => 'base#rpsls'
   match '/' => 'base#rpsls', :as => 'rpsls'
-  get '/reset_game' => 'base#reset_game', :as => 'reset_game'
+  get '/new_game' => 'base#new_game', :as => 'new_game'
   get '/leaderboard' => 'base#leaderboard', :as => 'leaderboard'
+  get '/clear_name' => 'base#clear_name', :as => 'clear_name'
   match '/name_input' => 'base#name_input', :as => 'name_input'
   
   # Sample of regular route:

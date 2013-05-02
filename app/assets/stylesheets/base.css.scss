@@ -3,176 +3,203 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 header {
+	h1#title {
+		float:left;
+		margin: 12px 5px 5px 15px;
+	}
 	position: fixed;
 	width: 100%;
 	height: 40px;
 	top: 0em;
+	#notice {
+		position: fixed;
+		top: 80px;
+		right:30px;
+	}
+	.game_details {
+		float:right;
+		margin: 15px 20px 5px 20px;
+		.total {
+			float:right;
+			font-size: 20px;
+			margin: 2px 5px 5px 20px;
+			padding:12px;
+			background-color: #585d95;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+		}
+		.reset {
+			float:right;
+			margin: 12px 12px 5px 30px;
+		}
+		.score {
+			float:right;
+			font-size: 20px;
+			margin: 2px 0px 5px 14px;
+			padding:12px;
+			background-color: #585d95;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+		}
+		.game_num {
+			float:right;
+			font-size: 20px;
+			margin: 4px 15px 5px 10px;
+			padding:6px;
+			background-color: #585d95;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+		}
+		.leaderboard {
+			float:left;
+			font-size: 20px;
+			margin: 4px 20px 5px 0px;
+			padding:6px;
+			background-color: #585d95;
+		}
+	}
+	#name_input_form {
+		float:right;
+		font-size: 20px;
+		margin: 15px 0px 5px 10px;
+		padding:6px 10px;
+		line-height: 28px;
+		background-color: #585d95;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		.name_input_field {
+			border-style: solid;
+			border-width: 1px;
+			border-color: black;
+			border-radius: 5px;
+			margin:0 0 5px 0;
+			height:24px;
+			font-family: helvetica, arial, sans serif;
+			padding: 3px;
+			font-size: 16px
+		}
+	}
+	input[name=commit] {
+		padding: 7px 12px;
+	  background: #333366;
+	  color: #FFF;
+	  font-size: 16px;
+	  -webkit-border-radius: 4px;
+	  -moz-border-radius: 4px;
+	  border-radius: 4px;
+	  border: solid 1px #191d4b;
+	  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+	  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	  -webkit-transition-duration: 0.2s;
+	  -moz-transition-duration: 0.2s;
+	  transition-duration: 0.2s;
+	  -webkit-user-select:none;
+	  -moz-user-select:none;
+	  -ms-user-select:none;
+	  user-select:none;
+	}
+	input[name=commit]:hover {
+	  background: #191d4b;
+	  border: solid 1px #000033;
+	  text-decoration: none;
+	}
+	input[name=commit]:active {
+	  -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+	  -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+	  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+	  background: #585d95;
+	  border: solid 1px #203E5F;
+	}
+	.name_msg {
+		float:right;
+		font-size: 14px;
+		margin: 30px 10px 5px 0px;
+	}
 }
-#title {
-	float:left;
-	margin: 10px 5px 5px 15px;
-}
-.moves {
-	float:left;
-	list-style: none;
-}
-.game_details {
-	float:right;
-	margin: 10px 20px 5px 20px;
-}
-.game_details .reset {
-	float:right;
-	margin: 12px 15px 5px 5px;
-}
-.game_details .score {
-	float:right;
-	font-size: 1.2em;
-	margin: 10px 0px 5px 10px;
-}
-.game_details .total {
-	float:right;
-	font-size: 20px;
-	margin: 4px 5px 5px 20px;
-	padding:6px;
-	background-color: #585d95;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-}
-.game_details .game_num {
-	float:right;
-	font-size: 20px;
-	margin: 4px 15px 5px 10px;
-	padding:6px;
-	background-color: #585d95;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-}
-#name_input_form {
-	float:right;
-	font-size: 20px;
-	margin: 14px 0px 5px 10px;
-	padding:6px;
-	background-color: #585d95;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-}
-.name_input_field {
-	border-style: solid;
-	border-width: 1px;
-	border-color: black;
-	margin:0;
-	font-family: helvetica, arial, sans serif;
-	padding: 3px;
-	font-size: 16px
-}
-.game_details .leaderboard {
-	float:left;
-	font-size: 20px;
-	margin: 4px 20px 5px 0px;
-	padding:6px;
-	background-color: #585d95;
-}
-table#game {
+
+#main_left {
+	img[alt="rules"] {
+		float:left;
+	}
+	position: absolute;
+	top:120px;
+	left:55px;
+	}
+.strategies {
 	position: fixed;
-	top:80px;
-	left:30px;
-	width: 900px;
-	min-width: 200px;
-	padding: 0px;
-	margin: 0px;
-}
-td.game {
-	margin-left: 20px
-}
-td.strategies {
-	background-color: #191d4b;
-	width:400px;
-}
-.status {
-	float:left;
-}
-img[alt="rules"] {
-	float:left;
-}
-table#leaderboard {
-	position: relative;
-	top: 40px;
-	margin: 0;
-	left:880px;
-	padding: 10px;
-	background-color: #585d95;
-	text-align: center;
-	width:550px;
-}
-table#leaderboard td {
-	width:30px;
-}
-table#leaderboard td.date {
-	width:100px;
-}
-#strategy_0 {
-	position: fixed;
-	background-image: url('guess_0.png');
 	background-position: top;
 	width: 166px;
 	height: 166px;
-	top:82px;
-	left:163px;
+	#strategy_0 {
+		background-image: url('guess_0.png');
+		top:119px;
+		left:186px;
+		:hover {
+			background-position: bottom;
+		}
+	}
+	#strategy_1 {
+		background-image: url('guess_1.png');
+		top:212px;
+		left:58px;
+		:hover {
+			background-position: bottom;
+		}
+	}
+	#strategy_2 {
+		background-image: url('guess_2.png');
+		top:214px;
+		left:311px;
+		:hover {
+			background-position: bottom;
+		}
+	}
+	#strategy_3 {
+		background-image: url('guess_3.png');
+		top:363px;
+		left:110px;
+		:hover {
+			background-position: bottom;
+		}
+	}
+	#strategy_4 {
+		background-image: url('guess_4.png');
+		top:363px;
+		left:268px;
+		:hover {
+			background-position: bottom;
+		}
+	}
 }
-#strategy_0:hover {
-	background-position: bottom;
+
+#main_center {
+	position: absolute;
+	left: 500px;
+	top:138px;
+	width: 450px;
+	.status {
+		float:left;
+	}
 }
-#strategy_1 {
-	position: fixed;
-	background-image: url('guess_1.png');
-	background-position: top;
-	width: 166px;
-	height: 166px;
-	top:176px;
-	left:36px;
+
+#main_right {
+	table#leaderboard {
+		position: relative;
+		top: 40px;
+		margin: 0;
+		padding: 10px;
+		background-color: #585d95;
+		text-align: center;
+		width:100%;
+	}
 }
-#strategy_1:hover {
-	background-position: bottom;
-}
-#strategy_2 {
-	position: fixed;
-	background-image: url('guess_2.png');
-	background-position: top;
-	width: 166px;
-	height: 166px;
-	top:177px;
-	left:289px;
-}
-#strategy_2:hover {
-	background-position: bottom;
-}
-#strategy_3 {
-	position: fixed;
-	background-image: url('guess_3.png');
-	background-position: top;
-	width: 166px;
-	height: 166px;
-	top:326px;
-	left:87px;
-}
-#strategy_3:hover {
-	background-position: bottom;
-}
-#strategy_4 {
-	position: fixed;
-	background-image: url('guess_4.png');
-	background-position: top;
-	width: 166px;
-	height: 166px;
-	top:326px;
-	left:246px;
-}
-#strategy_4:hover {
-	background-position: bottom;
-}
+
 #debug {
 	position: absolute;
 	bottom:40px;

@@ -11,18 +11,18 @@ class Match < ActiveRecord::Base
 			game.ties += 1
 			game.save!
 			if game.ties < 2
-				["Neither wins.", "Looks like a tie!", game]
+				["Neither wins.", "Looks like a tie!"]
 			else
-				["Notaone.", "We've tied... again.", game]
+				["Notaone.", "We've tied... again."]
 			end
 		elsif diff % 5 < 3
 			game.player_wins += 1
 			game.save!
-			["You won...", find_status(comp_move, player_move), game]
+			["You won...", find_status(comp_move, player_move)]
 		else
 			game.comp_wins += 1
 			game.save!
-			["I won!", find_status(comp_move, player_move), game]
+			["I won!", find_status(comp_move, player_move)]
 		end
 	end
 

@@ -1,30 +1,31 @@
+#!/bin/env ruby
+# encoding: utf-8
+
 class BaseController < ApplicationController
-	before_filter :new_game, :only => :rpsls
 
 	def rpsls
-		@name_msg = stored_name
+		@new_game_message = new_game_time?
 		@current_game = Game.find(session[:game])
+
 		@leaders = Leader.all(:order => "score DESC", :limit => 10)
 		@strategies = Match.strategies
+		@name_msg = stored_name
+
 		if player_move
 			comp_move = rand(5)
 			@current_match = Match.create!(:comp_move => comp_move, :player_move => player_move, :game_id => @current_game.id)
 			if player_move < 5
-				@winner, @status, @current_game = @current_match.winner_and_status(comp_move, player_move, @current_game)
-				@total_matches = @current_game.total_matches
-				@percent_won = @current_game.percent_won
+				@winner, @status = @current_match.winner_and_status(comp_move, player_move, @current_game)
 			else
 				flash[:warning] = "Invalid strategy."
 				redirect_to rpsls_path
 			end
 		else
 			@new_game_message = "<< Pick a strategy"
-			@total_matches = @current_game.total_matches
-			@percent_won = @current_game.percent_won
 		end
 	end
 
-	def reset_game
+	def new_game
 		game = Game.find(session[:game])
 		set_leader(game)
 		session[:game] = nil
@@ -33,7 +34,8 @@ class BaseController < ApplicationController
 	end
 
 	def leaderboard
-		@leaders = Leader.all(:order => 'score')
+		flash[:leaderboard] = true
+		redirect_to rpsls_path
 	end
 
 	def name_input
@@ -47,37 +49,43 @@ class BaseController < ApplicationController
 		end
 	end
 
+	def clear_name
+		session[:name] = nil
+		flash[:notice] = "Wiped successfully. Choose a new name."
+		redirect_to rpsls_path
+	end
+
 	private
 
-	def set_leader(game)
-		score = game.final_score
-		highscores = Leader.get_highscores
-		if score > highscores.min.to_f || highscores.size < 10
-			validate_name_input_and_create_leader
-		end
-	end
-
-	def player_move
-		if (p = params[:player_move])
-			Match.strategies.include?(p) ? Match.strategies.index(p) : 5
-	  else
-	  	nil
-	  end
-	end
-
-	def new_game
+	def new_game_time?
 		if !session[:game]
 			game = Game.create!(:comp_wins => 0, 
 													:player_wins => 0, 
 													:ties => 0, 
 													:played_on => Time.now)
 			session[:game] = game.id
-			@new_game_message = "<< Pick a strategy"
-			@new_game_message
+			new_game_message = "<< Pick a strategy"
+			new_game_message
 		end
 	end
 
-	def validate_name_input_and_create_leader
+	def stored_name
+		if !session[:name] then "input your initals, yo!" else nil end
+	end
+
+	def player_move
+		(p = params[:player_move]) ? Match.strategies.include?(p) ? Match.strategies.index(p) : 5 : nil
+	end
+
+	def set_leader(game)
+		score = game.final_score
+		highscores = Leader.get_highscores
+		if score > highscores.min.to_f || highscores.size < 10
+			validate_name_input_and_create_leader(game, score)
+		end
+	end
+
+	def validate_name_input_and_create_leader(game, score)
 		if !session[:name]
 			flash[:notice] = "You have brought glory unto your name! Now I need it to put on my awesome wall! Submit your initals..."
 			redirect_to rpsls_path
@@ -89,20 +97,17 @@ class BaseController < ApplicationController
 
 	def name_confirmation_messages
 		name = session[:name]
-		[
-			"#{name}, so cute!",
-			"#{name}... really?",
+		sayings = [
+			"#{name}! so cute!! 囧",
+			"#{name}... really? hehe",
 			"#{name}. OK, if you say so.",
-			"I'm guessing '#{name}' is a family name, huh?",
+			"I'm guessing '#{name}' is a family name, huh? :P",
 			"'#{name}' - I like it!",
-			"'#{name}' is probably the worst combination of letters imaginable.",
+			"'#{name}' is probably the worst combination of letters imaginable. j/k!",
 			"Never has a name more gracefully animated the tongue than '#{name}'!",
 			"I see what you've done there, you dog!"
-		][rand(8)]
-	end
-
-	def stored_name
-		session[:name] ? nil : "input your initals now in case you get lucky!"
+		]
+		sayings[rand(sayings.length)]
 	end
 
 end

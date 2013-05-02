@@ -18,15 +18,10 @@ body {
 	font-family: 'helvetica';
 	background-color: #191d4b;
 	color: #fff;
+	min-width: 900px;
 }
 li {
 	margin: 0;
-}
-#main {
-	margin: 55px 10px 0 10px;
-}
-#notice {
-	float:right;
 }
 a:visited {
 	color: yellow;

@@ -1,8 +1,27 @@
 class Leader < ActiveRecord::Base
+	include ActionView::Helpers::DateHelper
+
 	attr_accessible :name, :score, :played_on, :game_id
 	validates :name, :length => { :maximum => 3 }
 	has_one :game
-	has_many :matches
+
+	@@dynamic_methods_hash = {'wins' => 'player_wins', 
+														'ties' => 'ties', 
+														'losses' => 'comp_wins', 
+														'num_matches' => 'matches.size'}
+
+	@@dynamic_methods_hash.each_pair do |k,v|
+		class_eval <<-RUBY
+			def #{k}
+				begin
+					game = Game.find(self.game_id)
+					game.#{v}
+				rescue
+					0
+				end
+			end
+		RUBY
+	end
 
 	def self.get_highscores
 		highscores = []
@@ -11,54 +30,8 @@ class Leader < ActiveRecord::Base
 		highscores
 	end
 
-	def method_missing(*args)
-
-	end
-
-	def wins
-		begin
-			game = Game.find(self.game_id)
-			game.player_wins
-		rescue
-			0
-		end
-	end
-
-	def ties
-		begin
-			game = Game.find(self.game_id)
-			game.ties
-		rescue
-			0
-		end
-	end
-
-	def losses
-		begin
-			game = Game.find(self.game_id)
-			game.comp_wins
-		rescue
-			0
-		end
-	end
-
-	def num_matches
-		begin
-			game = Game.find(self.game_id)
-			game.matches.size
-		rescue
-			0	
-		end
-	end
-
-	def num_matches
-		begin
-			game = Game.find(self.game_id)
-			game.matches.size
-		rescue
-			0	
-		end
+	def played
+		time_ago_in_words(self.played_on).sub(/about/,"~").sub(/minutes/,"mins")
 	end
 
 end
-

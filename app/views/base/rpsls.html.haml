@@ -1,10 +1,15 @@
-%table#game
-	%td.strategies
+#main_left
+	.strategies 
 		-@strategies.each_with_index do |h, i|
 			= link_to '', rpsls_path(:player_move => h), :id => "strategy_#{i}"
 		= image_tag 'rules.png', :alt => 'rules'
-	= render 'game'	
-= render 'leaderboard'
+#main_center
+	-if flash[:leaderboard]
+		= render :partial => 'leaderboard'
+	-else
+		= render :partial => 'game'
+
+#main_right
 
 #debug
 	-if ENV["RAILS_ENV"] == "development"
