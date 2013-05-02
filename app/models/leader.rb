@@ -2,7 +2,6 @@ class Leader < ActiveRecord::Base
 	include ActionView::Helpers::DateHelper
 
 	attr_accessible :name, :score, :played_on, :game_id
-	validates :name, :length => { :maximum => 3 }
 	has_one :game
 
 	@@dynamic_methods_hash = {'wins' => 'player_wins', 

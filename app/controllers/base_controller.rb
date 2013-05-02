@@ -27,10 +27,16 @@ class BaseController < ApplicationController
 
 	def new_game
 		game = Game.find(session[:game])
-		set_leader(game)
-		session[:game] = nil
-		flash[:notice] = 'Session has been reset'
-		redirect_to rpsls_path and return
+		case set_leader(game)
+		when false
+			session[:game] = nil
+			flash[:notice] = "I didn't know your name... one has been chosen for you!"
+			redirect_to rpsls_path
+		else
+			session[:game] = nil
+			flash[:notice] = 'New game started! Good luck! ;)'
+			redirect_to rpsls_path
+		end
 	end
 
 	def leaderboard
@@ -80,17 +86,21 @@ class BaseController < ApplicationController
 	def set_leader(game)
 		score = game.final_score
 		highscores = Leader.get_highscores
-		if score > highscores.min.to_f || highscores.size < 10
+		highscores.include?(nil) ? highscore_low = 0.0 : highscore_low = highscores.min.to_f
+		if highscore_low == 0 || score > highscore_low
 			validate_name_input_and_create_leader(game, score)
+		else
+			false
 		end
 	end
 
 	def validate_name_input_and_create_leader(game, score)
-		if !session[:name]
-			flash[:notice] = "You have brought glory unto your name! Now I need it to put on my awesome wall! Submit your initals..."
-			redirect_to rpsls_path
+		if name = session[:name]
+			debugger
+			Leader.create!(:name => name, :score => score, :played_on => game.played_on, :game_id => game.id)
 		else
-			name = session[:name]
+			name = ('A'..'Z').to_a.sample(3).join
+			debugger
 			Leader.create!(:name => name, :score => score, :played_on => game.played_on, :game_id => game.id)
 		end
 	end
