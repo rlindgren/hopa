@@ -30,7 +30,7 @@ class BaseController < ApplicationController
 		set_leader(game)
 		session[:game] = nil
 		flash[:notice] = 'Session has been reset'
-		redirect_to rpsls_path
+		redirect_to rpsls_path and return
 	end
 
 	def leaderboard

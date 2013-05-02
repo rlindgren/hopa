@@ -124,58 +124,63 @@ header {
 }
 
 #main_left {
-	img[alt="rules"] {
-		float:left;
-	}
 	position: absolute;
 	top:120px;
 	left:55px;
+	img[alt="rules"] {
+		float:left;
 	}
-.strategies {
+}
+@mixin strategies {
 	position: fixed;
 	background-position: top;
 	width: 166px;
 	height: 166px;
-	#strategy_0 {
-		background-image: url('guess_0.png');
-		top:119px;
-		left:186px;
-		:hover {
-			background-position: bottom;
-		}
-	}
-	#strategy_1 {
-		background-image: url('guess_1.png');
-		top:212px;
-		left:58px;
-		:hover {
-			background-position: bottom;
-		}
-	}
-	#strategy_2 {
-		background-image: url('guess_2.png');
-		top:214px;
-		left:311px;
-		:hover {
-			background-position: bottom;
-		}
-	}
-	#strategy_3 {
-		background-image: url('guess_3.png');
-		top:363px;
-		left:110px;
-		:hover {
-			background-position: bottom;
-		}
-	}
-	#strategy_4 {
-		background-image: url('guess_4.png');
-		top:363px;
-		left:268px;
-		:hover {
-			background-position: bottom;
-		}
-	}
+}
+a[name=strategy_0] {
+	@include strategies;
+	background-image: url('guess_0.png');
+	top:119px;
+	left:186px;
+}
+a[name=strategy_0]:hover {
+	background-position: bottom;
+}
+a[name=strategy_1] {
+	@include strategies;
+	background-image: url('guess_1.png');
+	top:212px;
+	left:58px;
+}
+a[name=strategy_1]:hover {
+	background-position: bottom;
+}
+a[name=strategy_2] {
+	@include strategies;
+	background-image: url('guess_2.png');
+	top:214px;
+	left:311px;
+}
+a[name=strategy_2]:hover {
+	background-position: bottom;
+}
+a[name=strategy_3] {
+	@include strategies;
+	background-image: url('guess_3.png');
+	top:363px;
+	left:110px;
+}
+a[name=strategy_3]:hover {
+	background-position: bottom;
+}
+a[name=strategy_4] {
+	@include strategies;
+	background-image: url('guess_4.png');
+	top:363px;
+	left:268px;
+}
+a[name=strategy_4]:hover {
+	background-position: bottom;
 }
 
 #main_center {
@@ -184,6 +189,10 @@ header {
 	top:138px;
 	width: 450px;
 	.status {
+		float:left;
+	}
+	.moves {
+		list-style: none;
 		float:left;
 	}
 }
