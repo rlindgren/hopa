@@ -76,7 +76,7 @@ class BaseController < ApplicationController
 	end
 
 	def stored_name
-		if !session[:name] then "input your initals, yo!" else nil end
+		if !session[:name] then "input your initals!" else nil end
 	end
 
 	def player_move
@@ -96,11 +96,9 @@ class BaseController < ApplicationController
 
 	def validate_name_input_and_create_leader(game, score)
 		if name = session[:name]
-			debugger
-			Leader.create!(:name => name, :score => score, :played_on => game.played_on, :game_id => game.id)
+			Leader.create!(:name => name.upcase, :score => score, :played_on => game.played_on, :game_id => game.id)
 		else
 			name = ('A'..'Z').to_a.sample(3).join
-			debugger
 			Leader.create!(:name => name, :score => score, :played_on => game.played_on, :game_id => game.id)
 		end
 	end

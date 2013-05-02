@@ -1,11 +1,12 @@
 %header
 	%h1#title r-p-s-l-s
 	.game_details
-		.total= "[#{@current_game.percent_won}%] (#{@current_game.total_matches})"
 		.reset= link_to "new game", new_game_path
-		.score= " Me  (#{@current_game.comp_wins} : #{@current_game.player_wins})  You "
-
-	= render 'form'
+		.statsbox
+			.total= "[#{@current_game.percent_won}%] (#{@current_game.total_matches})"
+			.score= " Me  (#{@current_game.comp_wins} : #{@current_game.player_wins})  You "
+			.form= render 'form'
+		.name_msg= @name_msg ? @name_msg : link_to("change name", clear_name_path)
 	#notice= flash[:notice] if flash[:notice]
 	#notice= flash[:warning] if flash[:warning]
 -#		.leaderboard= link_to "Leaderboard", leaderboard_path
